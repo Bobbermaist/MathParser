@@ -19,7 +19,7 @@ public class NumericExpression implements Expression {
 	
 	// TODO TEST!
 	public void print() {
-		System.out.println("value = " + this.value);
+		System.out.print(" " + this.value + " ");
 	}
 
 }

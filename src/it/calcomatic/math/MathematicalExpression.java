@@ -1,6 +1,7 @@
 package it.calcomatic.math;
 
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class MathematicalExpression implements Expression {
 
@@ -8,10 +9,16 @@ public class MathematicalExpression implements Expression {
 	
 	private LinkedList<Expression> arguments = null;
 	
+	private int numArgs = 0;
+	
 	private int enclosureLevel = 0;
 	
 	public MathematicalExpression() {
 		this.arguments = new LinkedList<Expression>();
+	}
+	
+	public Operator getOperator() {
+		return this.operator;
 	}
 	
 	public void setOperator(Operator operator) throws RuntimeException {
@@ -21,8 +28,32 @@ public class MathematicalExpression implements Expression {
 		this.operator = operator;
 	}
 	
+	public void setEnclosureLevel(int enclosureLevel) {
+		this.enclosureLevel = enclosureLevel;
+	}
+	
 	public void addArgument(Expression expression) {
+		this.numArgs++;
+		if (this.operator instanceof UnaryOperator && this.numArgs > 1) {
+			throw new RuntimeException("Unexpected second argument for unary operator");
+		}
+		if (this.operator instanceof BinaryOperator && this.numArgs > 2) {
+			throw new RuntimeException("Unexpected third argument for binary operator");
+		}
 		this.arguments.add(expression);
+	}
+	
+	public boolean hasPriority(MathematicalExpression expression) {
+		if (this.enclosureLevel < expression.enclosureLevel) {
+			return false;
+		}
+		if (this.enclosureLevel > expression.enclosureLevel) {
+			return true;
+		}
+		if (this.operator.getPriority() < expression.operator.getPriority()) {
+			return false;
+		}
+		return true;
 	}
 	
 	@Override
@@ -33,7 +64,13 @@ public class MathematicalExpression implements Expression {
 
 	@Override
 	public void print() {
-		// TODO Auto-generated method stub
+		System.out.print(this.operator.getPattern() + "(");
 		
+		ListIterator<Expression> it = this.arguments.listIterator();
+		while (it.hasNext()) {
+			it.next().print();
+		}
+		
+		System.out.print(")");
 	}
 }
