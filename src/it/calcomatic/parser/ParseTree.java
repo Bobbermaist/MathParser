@@ -3,6 +3,7 @@ package it.calcomatic.parser;
 import java.text.ParseException;
 
 import it.calcomatic.math.ClosingBracket;
+import it.calcomatic.math.Expression;
 import it.calcomatic.math.MathematicalExpression;
 import it.calcomatic.math.NumericExpression;
 import it.calcomatic.math.NumericSymbol;
@@ -74,12 +75,19 @@ public class ParseTree {
 		expression.setOperator(operator);
 		expression.setEnclosureLevel(enclosureLevel);
 		if (current.hasPriority(expression)) {
+			Expression lastArgument = current.pollLastArgument();
+			expression.addArgument(lastArgument);
 			current.addArgument(expression);
-			this.current = expression;
+			//this.current = expression;
 		} else {
 			expression.addArgument(current);
-			current = expression;
+			//current = expression;
 		}
+		this.current = expression;
+		
+		// TODO TEST!
+		this.current.print();
+		System.out.println();
 	}
 	
 	// TODO TEST!

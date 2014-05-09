@@ -43,6 +43,14 @@ public class MathematicalExpression implements Expression {
 		this.arguments.add(expression);
 	}
 	
+	public Expression pollLastArgument() {
+		Expression lastArgument = this.arguments.pollLast();
+		if (lastArgument != null) {
+			this.numArgs--;
+		}
+		return lastArgument;
+	}
+	
 	public boolean hasPriority(MathematicalExpression expression) {
 		if (this.enclosureLevel < expression.enclosureLevel) {
 			return false;
