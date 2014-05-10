@@ -34,6 +34,9 @@ public class ParseTree {
 	}
 	
 	public void addToken(Token token) throws ParseException {
+		if (this.getCurrent() != null) this.getCurrent().print(); // TODO TEST!
+		System.out.println();
+		
 		this.tokenCount++;
 		
 		Symbol currentSymbol = token.getSymbol();
@@ -74,19 +77,20 @@ public class ParseTree {
 		MathematicalExpression expression = new MathematicalExpression();
 		expression.setOperator(operator);
 		expression.setEnclosureLevel(enclosureLevel);
+		
 		if (current.hasPriority(expression)) {
+			expression.addArgument(current);
+			this.root = expression;
+			this.current = null;
+		} else {
 			Expression lastArgument = current.pollLastArgument();
 			expression.addArgument(lastArgument);
 			current.addArgument(expression);
-			//this.current = expression;
-		} else {
-			expression.addArgument(current);
-			//current = expression;
+			this.current = expression;
 		}
-		this.current = expression;
 		
 		// TODO TEST!
-		this.current.print();
+		this.root.print();
 		System.out.println();
 	}
 	

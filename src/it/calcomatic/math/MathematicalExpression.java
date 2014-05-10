@@ -72,7 +72,13 @@ public class MathematicalExpression implements Expression {
 
 	@Override
 	public void print() {
-		System.out.print(this.operator.getPattern() + "(");
+		if (this.operator != null) {
+			System.out.print(this.operator.getPattern());
+		} else {
+			System.out.print("?");
+		}
+		System.out.print("(");
+		
 		
 		ListIterator<Expression> it = this.arguments.listIterator();
 		while (it.hasNext()) {
