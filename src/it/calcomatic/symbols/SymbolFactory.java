@@ -16,7 +16,10 @@ public class SymbolFactory {
 	};
 	
 	public Symbol instanceForName(String className) {
-		className = SYMBOL_PACKAGE + "." + className;
+		return this.instanceForFullyQualifiedName(SYMBOL_PACKAGE + "." + className);
+	}
+	
+	public Symbol instanceForFullyQualifiedName(String className) {
 		Object symbol = null;
 		try {
 			symbol = Class.forName(className).newInstance();
@@ -29,5 +32,9 @@ public class SymbolFactory {
 		} else {
 			return new InvalidSymbol();
 		}
+	}
+	
+	public Symbol newInstance(Symbol symbol) {
+		return this.instanceForFullyQualifiedName(symbol.getClass().toString());
 	}
 }

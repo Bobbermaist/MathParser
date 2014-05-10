@@ -5,7 +5,6 @@ import java.text.ParseException;
 import it.calcomatic.math.ClosingBracket;
 import it.calcomatic.math.Expression;
 import it.calcomatic.math.MathematicalExpression;
-import it.calcomatic.math.NumericExpression;
 import it.calcomatic.math.NumericSymbol;
 import it.calcomatic.math.OpeningBracket;
 import it.calcomatic.math.Operator;
@@ -33,15 +32,11 @@ public class ParseTree {
 		return this.root;
 	}
 	
-	public void addToken(Token token) throws ParseException {
-		if (this.getCurrent() != null) this.getCurrent().print(); // TODO TEST!
-		System.out.println();
-		
+	public void addSymbol(Symbol currentSymbol) throws ParseException {
 		this.tokenCount++;
 		
-		Symbol currentSymbol = token.getSymbol();
 		if (currentSymbol instanceof InvalidSymbol) {
-			throw new ParseException("Unknown symbol: " + token.getInfo(), this.tokenCount);
+			throw new ParseException("Unknown symbol: " + currentSymbol.getValue(), this.tokenCount);
 		}
 		
 		if (currentSymbol instanceof Operator) {
@@ -50,8 +45,8 @@ public class ParseTree {
 		}
 		
 		if (currentSymbol instanceof NumericSymbol) {
-			NumericExpression ne = new NumericExpression(token.getInfo());
-			this.getCurrent().addArgument(ne);
+			Expression num = (Expression) currentSymbol;
+			this.getCurrent().addArgument(num);
 			return;
 		}
 		
@@ -88,10 +83,6 @@ public class ParseTree {
 			current.addArgument(expression);
 			this.current = expression;
 		}
-		
-		// TODO TEST!
-		this.root.print();
-		System.out.println();
 	}
 	
 	// TODO TEST!

@@ -11,7 +11,7 @@ import java.util.Iterator;
 
 public class MathematicalMatcher {
 	
-	private LinkedHashMap<Pattern, Symbol> symbolTable;
+	private LinkedHashMap<Pattern, String> symbolTable;
 	
 	private SymbolFactory factory;
 	
@@ -22,22 +22,20 @@ public class MathematicalMatcher {
 	private void addSymbol(String className) {
 		Symbol symbol = this.factory.instanceForName(className);
 		Pattern pattern = Pattern.compile("^" + symbol.getPattern());
-		this.symbolTable.put(pattern, symbol);
+		this.symbolTable.put(pattern, className);
 	}
 	
 	private void initTable() {
-		this.symbolTable = new LinkedHashMap<Pattern, Symbol>(7);
+		this.symbolTable = new LinkedHashMap<Pattern, String>(9);
 		this.factory = new SymbolFactory();
 		
 		String[] list = SymbolFactory.SYMBOL_LIST;
 		for (String symbol : list) {
 			this.addSymbol(symbol);
 		}
-		
-		this.factory = null; // destroy SymbolFactory
 	}
 	
-	public Token getNextToken(String s) {
+	public Symbol getNextSymbol(String s) {
 		Iterator<Pattern> it = this.symbolTable.keySet().iterator();
 		Pattern regex;
 		Matcher matcher;
@@ -45,14 +43,17 @@ public class MathematicalMatcher {
 			regex = it.next();
 			matcher = regex.matcher(s);
 			if (matcher.find()) {
-				return new Token(this.symbolTable.get(regex), matcher.group(0));
+				Symbol symbol = this.factory.instanceForName(this.symbolTable.get(regex));
+				symbol.setValue(matcher.group(0));
+				return symbol;
 			}
 		}
 		
-		Symbol invalid = new InvalidSymbol();
+		InvalidSymbol invalid = new InvalidSymbol();
 		regex = Pattern.compile(invalid.getPattern());
 		matcher = regex.matcher(s);
 		matcher.find();
-		return new Token(invalid, matcher.group(0));
+		invalid.setValue(matcher.group(0));
+		return invalid;
 	}
 }

@@ -1,8 +1,7 @@
 package it.calcomatic.math;
 
-public interface BinaryOperator extends Operator {
+public abstract class BinaryOperator implements Operator {
 
-	public void setLeftOperand(String parameter);
-	
-	public void setRightOperand(String parameter);
+	@Override
+	public int getNumArgs() { return 2; }
 }

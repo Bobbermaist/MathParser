@@ -1,8 +1,8 @@
 package calcomatic;
 
 import static org.junit.Assert.*;
+import it.calcomatic.math.Symbol;
 import it.calcomatic.parser.MathematicalMatcher;
-import it.calcomatic.parser.Token;
 import it.calcomatic.symbols.*;
 
 import org.junit.Before;
@@ -19,55 +19,55 @@ public class MathematicalMatcherTest {
 
 	@Test
 	public void testMatchPlusOperator() {
-		Token token = this.matcher.getNextToken("+");
-		assertTrue(token.getSymbol() instanceof PlusOperator);
+		Symbol symbol = this.matcher.getNextSymbol("+");
+		assertTrue(symbol instanceof PlusOperator);
 	}
 	
 	@Test
 	public void testMatchMinusOperator() {
-		Token token = this.matcher.getNextToken("-");
-		assertTrue(token.getSymbol() instanceof MinusOperator);
+		Symbol symbol = this.matcher.getNextSymbol("-");
+		assertTrue(symbol instanceof MinusOperator);
 	}
 
 	@Test
 	public void testMatchStarOperator() {
-		Token token = this.matcher.getNextToken("*");
-		assertTrue(token.getSymbol() instanceof StarOperator);
+		Symbol symbol = this.matcher.getNextSymbol("*");
+		assertTrue(symbol instanceof StarOperator);
 	}
 	
 	@Test
 	public void testMatchSlashOperator() {
-		Token token = this.matcher.getNextToken("/");
-		assertTrue(token.getSymbol() instanceof SlashOperator);
+		Symbol symbol = this.matcher.getNextSymbol("/");
+		assertTrue(symbol instanceof SlashOperator);
 	}
 	
 	@Test
 	public void testMatchCaretOperator() {
-		Token token = this.matcher.getNextToken("^");
-		assertTrue(token.getSymbol() instanceof CaretOperator);
+		Symbol symbol = this.matcher.getNextSymbol("^");
+		assertTrue(symbol instanceof CaretOperator);
 	}
 	
 	@Test
 	public void testMatchSquareRootOperator() {
-		Token token = this.matcher.getNextToken("sqrt");
-		assertTrue(token.getSymbol() instanceof SquareRootOperator);
+		Symbol symbol = this.matcher.getNextSymbol("sqrt");
+		assertTrue(symbol instanceof SquareRootOperator);
 	}
 	
 	@Test
 	public void testMatchIntegerSymbol() {
-		Token token = this.matcher.getNextToken("0");
-		assertTrue(token.getSymbol() instanceof IntegerSymbol);
+		Symbol symbol = this.matcher.getNextSymbol("0");
+		assertTrue(symbol instanceof IntegerSymbol);
 	}
 	
 	@Test
 	public void testMatchTwoDigitInteger() {
-		Token token = this.matcher.getNextToken("11");
-		assertEquals("11", token.getInfo());
+		Symbol symbol = this.matcher.getNextSymbol("11");
+		assertEquals("11", symbol.getValue());
 	}
 	
 	@Test
 	public void testMatchInvalidSymbol() {
-		Token token = this.matcher.getNextToken("@");
-		assertTrue(token.getSymbol() instanceof InvalidSymbol);
+		Symbol symbol = this.matcher.getNextSymbol("@");
+		assertTrue(symbol instanceof InvalidSymbol);
 	}
 }

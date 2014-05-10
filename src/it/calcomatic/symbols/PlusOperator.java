@@ -2,15 +2,13 @@ package it.calcomatic.symbols;
 
 import it.calcomatic.math.BinaryOperator;
 
-public class PlusOperator implements BinaryOperator {
+public class PlusOperator extends BinaryOperator {
 
 	private static final String PATTERN= "\\+";
 	
 	private static final int PRIORITY = 1;
 	
-	private double leftAddend;
-	
-	private double rightAddend;
+	private String value;
 	
 	@Override
 	public String getPattern() {
@@ -23,13 +21,12 @@ public class PlusOperator implements BinaryOperator {
 	}
 
 	@Override
-	public void setLeftOperand(String parameter) {
-		this.leftAddend = Double.parseDouble(parameter);
+	public String getValue() {
+		return this.value;
 	}
-
+	
 	@Override
-	public void setRightOperand(String parameter) {
-		this.rightAddend = Double.parseDouble(parameter);
+	public void setValue(String value) {
+		this.value = value;
 	}
-
 }

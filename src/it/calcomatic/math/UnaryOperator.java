@@ -1,6 +1,7 @@
 package it.calcomatic.math;
 
-public interface UnaryOperator extends Operator {
+public abstract class UnaryOperator implements Operator {
 
-	public void setOperand(String parameter);
+	@Override
+	public int getNumArgs() { return 1; }
 }

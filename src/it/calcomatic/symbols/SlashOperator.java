@@ -2,15 +2,13 @@ package it.calcomatic.symbols;
 
 import it.calcomatic.math.BinaryOperator;
 
-public class SlashOperator implements BinaryOperator {
+public class SlashOperator extends BinaryOperator {
 	
 	private static final String PATTERN = "/";
 	
 	private static final int PRIORITY = 2;
 
-	private double divisor;
-	
-	private double dividend;
+	private String value;
 	
 	@Override
 	public String getPattern() {
@@ -21,15 +19,14 @@ public class SlashOperator implements BinaryOperator {
 	public int getPriority() {
 		return PRIORITY;
 	}
-
+	
 	@Override
-	public void setLeftOperand(String parameter) {
-		this.divisor = Double.parseDouble(parameter);
+	public String getValue() {
+		return this.value;
 	}
-
+	
 	@Override
-	public void setRightOperand(String parameter) {
-		this.dividend = Double.parseDouble(parameter);
+	public void setValue(String value) {
+		this.value = value;
 	}
-
 }

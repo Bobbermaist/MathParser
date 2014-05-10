@@ -2,16 +2,14 @@ package it.calcomatic.symbols;
 
 import it.calcomatic.math.BinaryOperator;
 
-public class CaretOperator implements BinaryOperator {
+public class CaretOperator extends BinaryOperator {
 	
 	private static final String PATTERN = "\\^";
 	
 	private static final int PRIORITY = 3;
-	
-	private double base;
-	
-	private double exponent;
 
+	private String value;
+	
 	@Override
 	public String getPattern() {
 		return PATTERN;
@@ -23,12 +21,12 @@ public class CaretOperator implements BinaryOperator {
 	}
 
 	@Override
-	public void setLeftOperand(String parameter) {
-		this.base = Double.parseDouble(parameter);
+	public String getValue() {
+		return this.value;
 	}
-
+	
 	@Override
-	public void setRightOperand(String parameter) {
-		this.exponent = Double.parseDouble(parameter);
+	public void setValue(String value) {
+		this.value = value;
 	}
 }
