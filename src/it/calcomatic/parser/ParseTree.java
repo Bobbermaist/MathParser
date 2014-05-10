@@ -1,7 +1,5 @@
 package it.calcomatic.parser;
 
-import java.text.ParseException;
-
 import it.calcomatic.math.ClosingBracket;
 import it.calcomatic.math.Expression;
 import it.calcomatic.math.MathematicalExpression;
@@ -19,8 +17,6 @@ public class ParseTree {
 	
 	private int enclosureLevel = 0;
 	
-	private int tokenCount = 0;
-	
 	public ParseTree() {
 		this.root = new MathematicalExpression();
 	}
@@ -32,11 +28,10 @@ public class ParseTree {
 		return this.root;
 	}
 	
-	public void addSymbol(Symbol currentSymbol) throws ParseException {
-		this.tokenCount++;
+	public void addSymbol(Symbol currentSymbol) throws RuntimeException {
 		
 		if (currentSymbol instanceof InvalidSymbol) {
-			throw new ParseException("Unknown symbol: " + currentSymbol.getValue(), this.tokenCount);
+			throw new RuntimeException("Unknown symbol: " + currentSymbol.getValue());
 		}
 		
 		if (currentSymbol instanceof Operator) {
@@ -63,6 +58,7 @@ public class ParseTree {
 	
 	private void addOperator(Operator operator, int enclosureLevel) throws RuntimeException {
 		MathematicalExpression current = this.getCurrent();
+
 		if (current.getOperator() == null) {
 			current.setOperator(operator);
 			current.setEnclosureLevel(enclosureLevel);
@@ -74,7 +70,7 @@ public class ParseTree {
 		expression.setEnclosureLevel(enclosureLevel);
 		
 		if (current.hasPriority(expression)) {
-			expression.addArgument(current);
+			expression.addArgument(this.root);
 			this.root = expression;
 			this.current = null;
 		} else {

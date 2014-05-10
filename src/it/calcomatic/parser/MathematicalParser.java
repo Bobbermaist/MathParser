@@ -15,13 +15,19 @@ public class MathematicalParser {
 		tokenizer.tokenize(input);
 		LinkedList<Symbol> tokens = tokenizer.getTokens();
 		ListIterator<Symbol> it = tokens.listIterator();
+		int tokenCount = 0;
 		
 		this.tree = new ParseTree();
 		
 		while (it.hasNext()) {
-			this.tree.addSymbol(it.next());
+			tokenCount++;
+			try {
+				this.tree.addSymbol(it.next());
+			} catch (RuntimeException e) {
+				throw new ParseException(e.getMessage(), tokenCount);
+			}
 		}
 		
-		this.tree.print();
+		this.tree.print(); // TODO TEST!
 	}
 }

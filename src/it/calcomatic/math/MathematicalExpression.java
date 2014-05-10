@@ -21,6 +21,10 @@ public class MathematicalExpression implements Expression {
 		return this.operator;
 	}
 	
+	public int getNumArgs() {
+		return this.numArgs;
+	}
+	
 	public void setOperator(Operator operator) throws RuntimeException {
 		if (this.operator != null) {
 			throw new RuntimeException("Unable to change operator");
@@ -32,14 +36,13 @@ public class MathematicalExpression implements Expression {
 		this.enclosureLevel = enclosureLevel;
 	}
 	
-	public void addArgument(Expression expression) {
+	public void addArgument(Expression expression) throws RuntimeException {
 		this.numArgs++;
-		if (this.operator instanceof UnaryOperator && this.numArgs > 1) {
-			throw new RuntimeException("Unexpected second argument for unary operator");
+		/*
+		if (this.operator != null && this.numArgs > this.operator.getNumArgs()) {
+			throw new RuntimeException("Too many arguments for this operator");
 		}
-		if (this.operator instanceof BinaryOperator && this.numArgs > 2) {
-			throw new RuntimeException("Unexpected third argument for binary operator");
-		}
+		*/
 		this.arguments.add(expression);
 	}
 	
@@ -73,7 +76,7 @@ public class MathematicalExpression implements Expression {
 	@Override
 	public void print() {
 		if (this.operator != null) {
-			System.out.print(this.operator.getPattern());
+			System.out.print(this.operator.getValue());
 		} else {
 			System.out.print("?");
 		}
