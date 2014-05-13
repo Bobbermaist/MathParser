@@ -14,11 +14,6 @@ public class IntegerSymbol implements NumericSymbol {
 	}
 	
 	@Override
-	public void print() {	// TODO TEST!
-		System.out.print(" " + this.value + " ");
-	}
-	
-	@Override
 	public double solve() {
 		return this.value;
 	}
@@ -31,5 +26,10 @@ public class IntegerSymbol implements NumericSymbol {
 	@Override
 	public void setValue(String value) {
 		this.value = Integer.parseInt(value);
+	}
+	
+	@Override
+	public String toString() {
+		return this.getValue();
 	}
 }

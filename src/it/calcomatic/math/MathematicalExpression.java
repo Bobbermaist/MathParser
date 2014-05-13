@@ -1,7 +1,7 @@
 package it.calcomatic.math;
 
+import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.ListIterator;
 
 public class MathematicalExpression implements Expression {
 
@@ -29,6 +29,10 @@ public class MathematicalExpression implements Expression {
 		if (this.operator != null) {
 			throw new RuntimeException("Unable to change operator");
 		}
+		if (this.numArgs > operator.getNumArgs()) {
+			throw new RuntimeException("Too many arguments for " +  this.operator.getClass());
+		}
+		
 		this.operator = operator;
 	}
 	
@@ -36,14 +40,25 @@ public class MathematicalExpression implements Expression {
 		this.enclosureLevel = enclosureLevel;
 	}
 	
+	public int getEnclosureLevel() {
+		return this.enclosureLevel;
+	}
+	
 	public void addArgument(Expression expression) throws RuntimeException {
 		this.numArgs++;
-		/*
+		
 		if (this.operator != null && this.numArgs > this.operator.getNumArgs()) {
-			throw new RuntimeException("Too many arguments for this operator");
+			throw new RuntimeException("Too many arguments for " + this.operator.getClass());
 		}
-		*/
+		
 		this.arguments.add(expression);
+	}
+	
+	public void replaceArguments(Expression expression) {
+		this.arguments = new LinkedList<Expression>();
+		this.numArgs = 0;
+		
+		this.addArgument(expression);
 	}
 	
 	public Expression pollLastArgument() {
@@ -68,26 +83,30 @@ public class MathematicalExpression implements Expression {
 	}
 	
 	@Override
-	public double solve() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double solve() throws MathematicalException {
+		if (this.operator == null) {
+			throw new MathematicalException("Missing operator");
+		}
+		
+		return this.operator.execute(this.arguments);
 	}
-
+	
 	@Override
-	public void print() {
-		if (this.operator != null) {
-			System.out.print(this.operator.getValue());
-		} else {
-			System.out.print("?");
+	public String toString() {
+		String operator = this.operator != null ? this.operator.toString() : "?";
+		String firstArgument = this.arguments.getFirst().toString();
+		String lastArgument = this.arguments.getLast().toString();
+		switch (this.arguments.size()) {
+		case 1: return operator + " " + firstArgument;
+		case 2: return firstArgument + " " + operator + " " + lastArgument;
+		default:
+			StringBuilder out = new StringBuilder(operator + " (");
+			Iterator<Expression> it = this.arguments.iterator();
+			while (it.hasNext()) {
+				out.append(it.next().toString());
+			}
+			out.append(")");
+			return out.toString();
 		}
-		System.out.print("(");
-		
-		
-		ListIterator<Expression> it = this.arguments.listIterator();
-		while (it.hasNext()) {
-			it.next().print();
-		}
-		
-		System.out.print(")");
 	}
 }

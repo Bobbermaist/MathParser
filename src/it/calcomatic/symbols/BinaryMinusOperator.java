@@ -6,12 +6,12 @@ import it.calcomatic.math.BinaryOperator;
 import it.calcomatic.math.Expression;
 import it.calcomatic.math.MathematicalException;
 
-public class SlashOperator extends BinaryOperator {
-	
-	private static final String PATTERN = "/";
-	
-	private static final int PRIORITY = 2;
+public class BinaryMinusOperator extends BinaryOperator {
 
+	private static final String PATTERN = "-";
+	
+	private static final int PRIORITY = 1;
+	
 	private String value;
 	
 	@Override
@@ -23,7 +23,7 @@ public class SlashOperator extends BinaryOperator {
 	public int getPriority() {
 		return PRIORITY;
 	}
-	
+
 	@Override
 	public String getValue() {
 		return this.value;
@@ -37,13 +37,13 @@ public class SlashOperator extends BinaryOperator {
 	@Override
 	public double execute(LinkedList<Expression> arguments) throws MathematicalException {
 		if (arguments.size() != this.getNumArgs()) {
-			throw new MathematicalException("Invalid number of arguments for slash operator");
+			throw new MathematicalException("Invalid number of arguments for binary minus operator");
 		}
 		
-		double dividend = arguments.getFirst().solve();
-		double divisor = arguments.getLast().solve();
+		double minuend = arguments.getFirst().solve();
+		double subtrahend = arguments.getLast().solve();
 		
-		return dividend / divisor;
+		return minuend - subtrahend;
 	}
 	
 	@Override

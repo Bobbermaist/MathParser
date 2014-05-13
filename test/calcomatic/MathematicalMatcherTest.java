@@ -26,7 +26,7 @@ public class MathematicalMatcherTest {
 	@Test
 	public void testMatchMinusOperator() {
 		Symbol symbol = this.matcher.getNextSymbol("-");
-		assertTrue(symbol instanceof MinusOperator);
+		assertTrue(symbol instanceof BinaryMinusOperator);
 	}
 
 	@Test

@@ -7,7 +7,4 @@ package it.calcomatic.math;
 public interface Expression {
 	
 	public double solve();
-	
-	// TODO TEST!
-	public void print();
 }

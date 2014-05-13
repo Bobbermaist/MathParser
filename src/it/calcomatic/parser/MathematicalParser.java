@@ -1,33 +1,34 @@
 package it.calcomatic.parser;
 
-import it.calcomatic.math.Symbol;
-
 import java.text.ParseException;
-import java.util.LinkedList;
-import java.util.ListIterator;
 
 public class MathematicalParser {
 	
 	private ParseTree tree;
 	
+	public ParseTree getTree() {
+		return this.tree;
+	}
+	
 	public void parse(String input) throws ParseException {
 		MathematicalTokenizer tokenizer = new MathematicalTokenizer();
 		tokenizer.tokenize(input);
-		LinkedList<Symbol> tokens = tokenizer.getTokens();
-		ListIterator<Symbol> it = tokens.listIterator();
-		int tokenCount = 0;
+		TokenList tokens = tokenizer.getTokens();
+		TokenIterator it = tokens.tokenIterator();
 		
 		this.tree = new ParseTree();
+		System.out.println(tokens);
 		
 		while (it.hasNext()) {
-			tokenCount++;
+			
+			this.tree.addSymbol(it.next());
+			/*
 			try {
 				this.tree.addSymbol(it.next());
 			} catch (RuntimeException e) {
 				throw new ParseException(e.getMessage(), tokenCount);
 			}
+			*/
 		}
-		
-		this.tree.print(); // TODO TEST!
 	}
 }

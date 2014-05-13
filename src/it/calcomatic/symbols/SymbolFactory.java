@@ -9,8 +9,9 @@ public class SymbolFactory {
 	public static final String[] SYMBOL_LIST = {
 		"IntegerSymbol",
 		
-		"PlusOperator", "MinusOperator", "StarOperator",
+		"PlusOperator", "BinaryMinusOperator", "StarOperator",
 		"SlashOperator", "SquareRootOperator", "CaretOperator",
+		"FactorialOperator",
 		
 		"OpeningRoundBracket", "ClosingRoundBracket"
 	};
