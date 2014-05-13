@@ -1,6 +1,7 @@
 package it.calcomatic.parser;
 
 import it.calcomatic.math.ClosingBracket;
+import it.calcomatic.math.NumericSymbol;
 import it.calcomatic.math.OpeningBracket;
 import it.calcomatic.math.Operator;
 import it.calcomatic.math.Symbol;
@@ -51,7 +52,6 @@ public class MathematicalTokenizer {
 	
 	private void normalizeMinusOperator() {
 		if (! (this.current instanceof Operator || this.current instanceof OpeningBracket)) {
-			// nothing to normalize
 			return;
 		}
 		if (! (this.lookahead instanceof BinaryMinusOperator)) {
@@ -67,53 +67,36 @@ public class MathematicalTokenizer {
 		if (! (this.current instanceof UnaryOperator)) {
 			return;
 		}
+		if (this.lookahead instanceof NumericSymbol) {
+			return;
+		}
 		
 		UnaryOperator unaryOperator = (UnaryOperator) this.current;
 		if (! unaryOperator.operatorAfterArgument()) {
 			return;
 		}
 		
-		//int startIndex = this.iterator.nextIndex() - 1;
 		int bracketLevel = 0;
-		TokenIterator it = this.tokens.tokenIterator(this.iterator.nextIndex() - 1);
-		Symbol current;
-		it.remove();
-		while (it.hasPrevious()) {
-			current = it.previous();
+		this.iterator.remove();
+		int startIndex = this.iterator.nextIndex();
+		
+		while (this.iterator.hasPrevious()) {
+			this.current = this.iterator.previous();
 			
 			if (bracketLevel < 0) {
 				throw new RuntimeException("Unexpected opening bracket");
-			} else if (current instanceof OpeningBracket) {
+			} else if (this.current instanceof OpeningBracket) {
 				bracketLevel--;
-			} else if (current instanceof ClosingBracket) {
+			} else if (this.current instanceof ClosingBracket) {
 				bracketLevel++;
 			}
 			
 			if (bracketLevel == 0) {
-				it.add(unaryOperator);
-				break;
-			}
-		}
-		/*
-		this.iterator.remove();
-		while (this.iterator.hasPrevious()) {
-			this.current = this.iterator.previous();
-			
-			/* TODO
-			 * if (bracketLevel < 0) {
-				throw new RuntimeException("Unexpected opening bracket");
-			}* /
-			if (this.current instanceof OpeningBracket) {
-				bracketLevel--;
-			} else if (this.current instanceof ClosingBracket) {
-				bracketLevel++;
-			} else if (bracketLevel == 0) {
 				this.iterator.add(unaryOperator);
 				break;
 			}
 		}
-		System.out.println(startIndex);
-		this.iterator = this.tokens.tokenIterator(startIndex);
-		*/
+		
+		this.iterator = this.tokens.tokenIterator(startIndex + 1);
 	}
 }
