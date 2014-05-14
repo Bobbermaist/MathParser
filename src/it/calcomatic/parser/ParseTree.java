@@ -71,6 +71,7 @@ public class ParseTree implements Expression {
 		
 		if (current.getOperator() instanceof UnaryOperator
 				|| operator instanceof UnaryOperator) {
+			// TODO
 			current.addArgument(expression);
 			this.current = expression;
 			return;
