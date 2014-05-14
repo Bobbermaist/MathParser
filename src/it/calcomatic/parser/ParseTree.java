@@ -41,8 +41,7 @@ public class ParseTree implements Expression {
 		}
 		
 		if (currentSymbol instanceof NumericSymbol) {
-			Expression num = (Expression) currentSymbol;
-			this.getCurrent().addArgument(num);
+			this.getCurrent().addArgument((Expression) currentSymbol);
 			return;
 		}
 		
@@ -70,8 +69,8 @@ public class ParseTree implements Expression {
 		expression.setOperator(operator);
 		expression.setEnclosureLevel(this.enclosureLevel);
 		
-		// TODO tests!
-		if (current.getOperator() instanceof UnaryOperator) {
+		if (current.getOperator() instanceof UnaryOperator
+				|| operator instanceof UnaryOperator) {
 			current.addArgument(expression);
 			this.current = expression;
 			return;
