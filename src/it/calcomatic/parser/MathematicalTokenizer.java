@@ -60,7 +60,7 @@ public class MathematicalTokenizer {
 		
 		Symbol normalized = new UnaryMinusOperator();
 		normalized.setValue(lookahead.getValue());
-		this.iterator.set(normalized);
+		this.iterator.setLookahead(normalized);
 	}
 	
 	private void normalizeUnaryOperator() {

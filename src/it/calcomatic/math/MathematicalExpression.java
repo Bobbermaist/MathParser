@@ -94,8 +94,13 @@ public class MathematicalExpression implements Expression {
 	@Override
 	public String toString() {
 		String operator = this.operator != null ? this.operator.toString() : "?";
-		String firstArgument = this.arguments.getFirst().toString();
-		String lastArgument = this.arguments.getLast().toString();
+		String firstArgument = "null", lastArgument = "null";
+		
+		if (! this.arguments.isEmpty()) {
+			firstArgument = this.arguments.getFirst().toString();
+			lastArgument = this.arguments.getLast().toString();
+		}
+		
 		switch (this.arguments.size()) {
 		case 1: return operator + " " + firstArgument;
 		case 2: return firstArgument + " " + operator + " " + lastArgument;

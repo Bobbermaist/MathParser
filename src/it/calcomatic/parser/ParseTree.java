@@ -70,15 +70,21 @@ public class ParseTree implements Expression {
 		expression.setOperator(operator);
 		expression.setEnclosureLevel(this.enclosureLevel);
 		
+		// TODO tests!
+		if (current.getOperator() instanceof UnaryOperator) {
+			current.addArgument(expression);
+			this.current = expression;
+			return;
+		}
+		
 		if (current.hasPriority(expression)) {
 			expression.addArgument(this.root);
 			this.root = expression;
 			this.current = null;
 		} else {
-			if (! (expression.getOperator() instanceof UnaryOperator)) {
-				Expression lastArgument = current.pollLastArgument();
-				expression.addArgument(lastArgument);
-			}
+			Expression lastArgument = current.pollLastArgument();
+			expression.addArgument(lastArgument);
+			
 			current.addArgument(expression);
 			this.current = expression;
 		}
