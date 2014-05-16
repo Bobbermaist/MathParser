@@ -1,28 +1,51 @@
 package it.calcomatic.parser;
 
-import it.calcomatic.math.ClosingBracket;
 import it.calcomatic.math.Expression;
 import it.calcomatic.math.MathematicalExpression;
 import it.calcomatic.math.NumericSymbol;
-import it.calcomatic.math.OpeningBracket;
 import it.calcomatic.math.Operator;
+import it.calcomatic.math.ParametricExpression;
 import it.calcomatic.math.Symbol;
 import it.calcomatic.math.UnaryOperator;
 import it.calcomatic.symbols.InvalidSymbol;
 
-public class ParseTree implements Expression {
+public class ParseTree implements ParametricExpression {
 
 	private MathematicalExpression root = null;
 	
-	private MathematicalExpression current = null;
-	
-	private int enclosureLevel = 0;
+	private ParametricExpression current = null;
 	
 	public ParseTree() {
 		this.root = new MathematicalExpression();
 	}
 	
-	private MathematicalExpression getCurrent() {
+	@Override
+	public Operator getOperator() {
+		return this.root.getOperator();
+	}
+	
+	@Override
+	public void addArgument(Expression expression) {
+		this.getCurrent().addArgument(expression);
+		this.current = (ParametricExpression) expression;
+	}
+	
+	@Override
+	public void setOperator(Operator operator) throws RuntimeException {
+		this.root.setOperator(operator);
+	}
+	
+	@Override
+	public boolean hasPriority(ParametricExpression expression) {
+		return this.root.hasPriority(expression);
+	}
+	
+	@Override
+	public Expression pollLastArgument() {
+		return this.root.pollLastArgument();
+	}
+	
+	private ParametricExpression getCurrent() {
 		if (this.current != null) {
 			return this.current;
 		}
@@ -44,36 +67,22 @@ public class ParseTree implements Expression {
 			this.getCurrent().addArgument((Expression) currentSymbol);
 			return;
 		}
-		
-		if (currentSymbol instanceof OpeningBracket) {
-			this.enclosureLevel++;
-			return;
-		}
-		
-		if (currentSymbol instanceof ClosingBracket) {
-			this.enclosureLevel--;
-			return;
-		}
 	}
 	
 	private void addOperator(Operator operator) throws RuntimeException {
-		MathematicalExpression current = this.getCurrent();
+		ParametricExpression current = this.getCurrent();
 
 		if (current.getOperator() == null) {
 			current.setOperator(operator);
-			current.setEnclosureLevel(this.enclosureLevel);
 			return;
 		}
 		
 		MathematicalExpression expression = new MathematicalExpression();
 		expression.setOperator(operator);
-		expression.setEnclosureLevel(this.enclosureLevel);
 		
 		if (current.getOperator() instanceof UnaryOperator
 				|| operator instanceof UnaryOperator) {
-			// TODO
-			current.addArgument(expression);
-			this.current = expression;
+			this.addArgument(expression);
 			return;
 		}
 		
@@ -85,33 +94,9 @@ public class ParseTree implements Expression {
 			Expression lastArgument = current.pollLastArgument();
 			expression.addArgument(lastArgument);
 			
-			current.addArgument(expression);
-			this.current = expression;
+			this.addArgument(expression);
 		}
 	}
-	
-	/*
-	private void addUnaryOperator(MathematicalExpression expression) throws RuntimeException {
-		if (expression.getNumArgs() != 0) {
-			throw new RuntimeException("Unexpected args in new operator expression");
-		}
-		
-		if (this.addMissingOperator(expression)) {
-			return;
-		}
-		
-		MathematicalExpression current = this.getCurrent();
-		
-		UnaryOperator operator = (UnaryOperator) expression.getOperator();
-		if (operator.operatorAfterArgument()) {
-			expression.addArgument(current);
-			current.replaceArguments(expression);
-		} else {
-			current.addArgument(expression);
-			this.current = expression;
-		}
-	}
-	*/
 
 	@Override
 	public double solve() {

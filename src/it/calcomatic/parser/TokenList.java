@@ -25,10 +25,7 @@ public class TokenList extends LinkedList<Symbol> {
 
 		private Symbol lookahead = null;
 
-		TokenListIterator(int index) throws IndexOutOfBoundsException {
-			if (index < 0 || index > size()) {
-				throw new IndexOutOfBoundsException();
-			}
+		TokenListIterator(int index) {
 			this.initCurrentIterator(index);
 			this.nextLookahead();
 		}
@@ -69,8 +66,8 @@ public class TokenList extends LinkedList<Symbol> {
 
 		private void previousLookahead() {
 			if (this.lookaheadIterator == null) {
-				if (this.initLookaheadIterator(this.nextIndex()))
-					this.nextLookahead();
+				if (this.initLookaheadIterator(this.nextIndex() + 1))
+					this.previousLookahead();
 			} else if (this.lookaheadIterator.hasPrevious()) {
 				this.lookahead = this.lookaheadIterator.previous();
 			} else {
@@ -118,7 +115,7 @@ public class TokenList extends LinkedList<Symbol> {
 
 		@Override
 		public int nextLookaheadIndex() {
-			return this.lookaheadIterator.nextIndex();
+			return this.nextIndex() + 1;
 		}
 
 		@Override

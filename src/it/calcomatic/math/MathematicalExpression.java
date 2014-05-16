@@ -3,7 +3,7 @@ package it.calcomatic.math;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class MathematicalExpression implements Expression {
+public class MathematicalExpression implements ParametricExpression {
 
 	private Operator operator = null;
 	
@@ -11,12 +11,11 @@ public class MathematicalExpression implements Expression {
 	
 	private int numArgs = 0;
 	
-	private int enclosureLevel = 0;
-	
 	public MathematicalExpression() {
 		this.arguments = new LinkedList<Expression>();
 	}
 	
+	@Override
 	public Operator getOperator() {
 		return this.operator;
 	}
@@ -25,6 +24,7 @@ public class MathematicalExpression implements Expression {
 		return this.numArgs;
 	}
 	
+	@Override
 	public void setOperator(Operator operator) throws RuntimeException {
 		if (this.operator != null) {
 			throw new RuntimeException("Unable to change operator");
@@ -36,14 +36,7 @@ public class MathematicalExpression implements Expression {
 		this.operator = operator;
 	}
 	
-	public void setEnclosureLevel(int enclosureLevel) {
-		this.enclosureLevel = enclosureLevel;
-	}
-	
-	public int getEnclosureLevel() {
-		return this.enclosureLevel;
-	}
-	
+	@Override
 	public void addArgument(Expression expression) throws RuntimeException {
 		this.numArgs++;
 		System.out.println("adding " + expression + " to " + this.operator); // TODO test
@@ -54,13 +47,15 @@ public class MathematicalExpression implements Expression {
 		this.arguments.add(expression);
 	}
 	
-	public void replaceArguments(Expression expression) {
-		this.arguments = new LinkedList<Expression>();
-		this.numArgs = 0;
-		
-		this.addArgument(expression);
+	@Override
+	public boolean hasPriority(ParametricExpression expression) {
+		if (this.operator.getPriority() < expression.getOperator().getPriority()) {
+			return false;
+		}
+		return true;
 	}
 	
+	@Override
 	public Expression pollLastArgument() {
 		Expression lastArgument = this.arguments.pollLast();
 		if (lastArgument != null) {
@@ -69,17 +64,11 @@ public class MathematicalExpression implements Expression {
 		return lastArgument;
 	}
 	
-	public boolean hasPriority(MathematicalExpression expression) {
-		if (this.enclosureLevel < expression.enclosureLevel) {
-			return false;
-		}
-		if (this.enclosureLevel > expression.enclosureLevel) {
-			return true;
-		}
-		if (this.operator.getPriority() < expression.operator.getPriority()) {
-			return false;
-		}
-		return true;
+	public void replaceArguments(Expression expression) {
+		this.arguments = new LinkedList<Expression>();
+		this.numArgs = 0;
+		
+		this.addArgument(expression);
 	}
 	
 	@Override
