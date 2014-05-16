@@ -3,7 +3,7 @@ package it.calcomatic.math;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class MathematicalExpression implements ParametricExpression {
+public class SimpleExpression implements ParametricExpression {
 
 	private Operator operator = null;
 	
@@ -11,7 +11,7 @@ public class MathematicalExpression implements ParametricExpression {
 	
 	private int numArgs = 0;
 	
-	public MathematicalExpression() {
+	public SimpleExpression() {
 		this.arguments = new LinkedList<Expression>();
 	}
 	

@@ -1,7 +1,7 @@
 package it.calcomatic.parser;
 
 import it.calcomatic.math.Expression;
-import it.calcomatic.math.MathematicalExpression;
+import it.calcomatic.math.SimpleExpression;
 import it.calcomatic.math.NumericSymbol;
 import it.calcomatic.math.Operator;
 import it.calcomatic.math.ParametricExpression;
@@ -9,14 +9,14 @@ import it.calcomatic.math.Symbol;
 import it.calcomatic.math.UnaryOperator;
 import it.calcomatic.symbols.InvalidSymbol;
 
-public class ParseTree implements ParametricExpression {
+public class ComplexExpression implements ParametricExpression {
 
-	private MathematicalExpression root = null;
+	private SimpleExpression root = null;
 	
 	private ParametricExpression current = null;
 	
-	public ParseTree() {
-		this.root = new MathematicalExpression();
+	public ComplexExpression() {
+		this.root = new SimpleExpression();
 	}
 	
 	@Override
@@ -82,7 +82,7 @@ public class ParseTree implements ParametricExpression {
 			return;
 		}
 		
-		MathematicalExpression expression = new MathematicalExpression();
+		SimpleExpression expression = new SimpleExpression();
 		expression.setOperator(operator);
 		
 		if (current.getOperator() instanceof UnaryOperator

@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 import it.calcomatic.parser.MathematicalParser;
-import it.calcomatic.parser.ParseTree;
+import it.calcomatic.parser.ComplexExpression;
 
 public class MainTest {
 
@@ -15,7 +15,7 @@ public class MainTest {
 		MathematicalParser parser = new MathematicalParser();
 		parser.parse(input);
 		
-		ParseTree tree = parser.getTree();
+		ComplexExpression tree = parser.getTree();
 		
 		System.out.println(tree.toString());
 		

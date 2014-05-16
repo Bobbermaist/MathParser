@@ -10,13 +10,13 @@ import java.util.ListIterator;
 
 public class MathematicalParser {
 	
-	private ParseTree expression;
+	private ComplexExpression expression;
 	
-	private ArrayList<ParseTree> trees;
+	private ArrayList<ComplexExpression> trees;
 	
 	private int enclosureLevel = 0;
 	
-	public ParseTree getTree() {
+	public ComplexExpression getTree() {
 		return this.expression;
 	}
 	
@@ -26,7 +26,7 @@ public class MathematicalParser {
 		TokenList tokens = tokenizer.getTokens();
 		
 		Symbol currentSymbol;
-		this.trees = new ArrayList<ParseTree>();
+		this.trees = new ArrayList<ComplexExpression>();
 		TokenIterator it = tokens.tokenIterator();
 		while (it.hasNext()) {
 			currentSymbol = it.next();
@@ -44,11 +44,11 @@ public class MathematicalParser {
 	}
 	
 	private void addSymbolToTree(Symbol symbol) {
-		ParseTree tree;
+		ComplexExpression tree;
 		try {
 			tree = this.trees.get(this.enclosureLevel);
 		} catch (IndexOutOfBoundsException e) {
-			this.trees.add(this.enclosureLevel, new ParseTree());
+			this.trees.add(this.enclosureLevel, new ComplexExpression());
 			tree = this.trees.get(this.enclosureLevel);
 		}
 		
@@ -56,8 +56,8 @@ public class MathematicalParser {
 	}
 	
 	private void createExpression() {
-		ParseTree tree;
-		ListIterator<ParseTree> it = this.trees.listIterator();
+		ComplexExpression tree;
+		ListIterator<ComplexExpression> it = this.trees.listIterator();
 		while (it.hasNext()) {
 			tree = it.next();
 			if (this.expression == null) {
