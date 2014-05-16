@@ -25,6 +25,11 @@ public class ParseTree implements ParametricExpression {
 	}
 	
 	@Override
+	public int getNumArgs() {
+		return this.root.getNumArgs();
+	}
+	
+	@Override
 	public void addArgument(Expression expression) {
 		this.getCurrent().addArgument(expression);
 		this.current = (ParametricExpression) expression;
@@ -117,6 +122,6 @@ public class ParseTree implements ParametricExpression {
 	}
 	
 	public String expressionToString() {
-		return this.root.toString();
+		return "(" + this.root.toString() + ")";
 	}
 }

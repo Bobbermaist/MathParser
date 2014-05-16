@@ -6,9 +6,11 @@ public interface ParametricExpression extends Expression {
 	
 	public void setOperator(Operator operator) throws RuntimeException;
 	
+	public int getNumArgs();
+	
 	public void addArgument(Expression expression);
 	
-	public boolean hasPriority(ParametricExpression expression);
-	
 	public Expression pollLastArgument();
+	
+	public boolean hasPriority(ParametricExpression expression);
 }

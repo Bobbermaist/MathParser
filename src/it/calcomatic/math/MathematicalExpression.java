@@ -20,6 +20,7 @@ public class MathematicalExpression implements ParametricExpression {
 		return this.operator;
 	}
 	
+	@Override
 	public int getNumArgs() {
 		return this.numArgs;
 	}
@@ -39,7 +40,7 @@ public class MathematicalExpression implements ParametricExpression {
 	@Override
 	public void addArgument(Expression expression) throws RuntimeException {
 		this.numArgs++;
-		System.out.println("adding " + expression + " to " + this.operator); // TODO test
+		
 		if (this.operator != null && this.numArgs > this.operator.getNumArgs()) {
 			throw new RuntimeException("Too many arguments for " + this.operator.getClass());
 		}
