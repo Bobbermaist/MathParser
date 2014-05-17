@@ -34,7 +34,7 @@ public class FactorialOperator extends UnaryOperator {
 	
 	@Override
 	public double execute(LinkedList<Expression> arguments) throws MathematicalException {
-		if (arguments.size() != this.getNumArgs()) {
+		if (arguments.size() != PARAM_NUMBER) {
 			throw new MathematicalException("Invalid number of arguments for unary minus operator");
 		}
 		

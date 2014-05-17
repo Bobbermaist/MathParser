@@ -30,26 +30,19 @@ public class SimpleExpression implements ParametricExpression {
 		if (this.operator != null) {
 			throw new RuntimeException("Unable to change operator");
 		}
-		if (this.numArgs > operator.getNumArgs()) {
-			throw new RuntimeException("Too many arguments for " +  this.operator.getClass());
-		}
 		
 		this.operator = operator;
 	}
 	
 	@Override
-	public void addArgument(Expression expression) throws RuntimeException {
+	public void addArgument(Expression expression) {
 		this.numArgs++;
-		
-		if (this.operator != null && this.numArgs > this.operator.getNumArgs()) {
-			throw new RuntimeException("Too many arguments for " + this.operator.getClass());
-		}
 		
 		this.arguments.add(expression);
 	}
 	
 	@Override
-	public boolean hasPriority(ParametricExpression expression) {
+	public boolean hasPriorityOver(ParametricExpression expression) {
 		if (this.operator.getPriority() < expression.getOperator().getPriority()) {
 			return false;
 		}
@@ -92,8 +85,9 @@ public class SimpleExpression implements ParametricExpression {
 		}
 		
 		switch (this.arguments.size()) {
-		case 1: return operator + " " + firstArgument;
-		case 2: return firstArgument + " " + operator + " " + lastArgument;
+		case 0: return operator;
+		case 1: return "(" + operator + " " + firstArgument + ")";
+		case 2: return "(" + firstArgument + " " + operator + " " + lastArgument +  ")";
 		default:
 			StringBuilder out = new StringBuilder(operator + " (");
 			Iterator<Expression> it = this.arguments.iterator();

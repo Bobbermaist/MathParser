@@ -3,8 +3,8 @@ package it.calcomatic;
 import java.text.ParseException;
 import java.util.Scanner;
 
+import it.calcomatic.math.ComplexExpression;
 import it.calcomatic.parser.MathematicalParser;
-import it.calcomatic.parser.ComplexExpression;
 
 public class MainTest {
 

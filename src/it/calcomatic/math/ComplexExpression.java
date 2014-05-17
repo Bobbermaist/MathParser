@@ -1,12 +1,5 @@
-package it.calcomatic.parser;
+package it.calcomatic.math;
 
-import it.calcomatic.math.Expression;
-import it.calcomatic.math.SimpleExpression;
-import it.calcomatic.math.NumericSymbol;
-import it.calcomatic.math.Operator;
-import it.calcomatic.math.ParametricExpression;
-import it.calcomatic.math.Symbol;
-import it.calcomatic.math.UnaryOperator;
 import it.calcomatic.symbols.InvalidSymbol;
 
 public class ComplexExpression implements ParametricExpression {
@@ -41,8 +34,8 @@ public class ComplexExpression implements ParametricExpression {
 	}
 	
 	@Override
-	public boolean hasPriority(ParametricExpression expression) {
-		return this.root.hasPriority(expression);
+	public boolean hasPriorityOver(ParametricExpression expression) {
+		return this.root.hasPriorityOver(expression);
 	}
 	
 	@Override
@@ -91,7 +84,7 @@ public class ComplexExpression implements ParametricExpression {
 			return;
 		}
 		
-		if (current.hasPriority(expression)) {
+		if (current.hasPriorityOver(expression)) {
 			expression.addArgument(this.root);
 			this.root = expression;
 			this.current = null;

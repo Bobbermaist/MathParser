@@ -1,6 +1,7 @@
 package it.calcomatic.parser;
 
 import it.calcomatic.math.ClosingBracket;
+import it.calcomatic.math.ComplexExpression;
 import it.calcomatic.math.OpeningBracket;
 import it.calcomatic.math.Symbol;
 
