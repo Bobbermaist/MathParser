@@ -85,9 +85,11 @@ public class ComplexExpression implements ParametricExpression {
 		}
 		
 		if (current.hasPriorityOver(expression)) {
+			/*
 			expression.addArgument(this.root);
 			this.root = expression;
-			this.current = null;
+			this.current = null; //TODO
+			*/
 		} else {
 			Expression lastArgument = current.pollLastArgument();
 			expression.addArgument(lastArgument);
@@ -95,7 +97,12 @@ public class ComplexExpression implements ParametricExpression {
 			this.addArgument(expression);
 		}
 	}
-
+	
+	/*@Override
+	public void replaceArguments(Expression expression) {
+		this.root.replaceArguments(expression);
+	}*/
+	
 	@Override
 	public double solve() {
 		return this.root.solve();

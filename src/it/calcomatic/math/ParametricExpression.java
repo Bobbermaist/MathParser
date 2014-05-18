@@ -12,5 +12,7 @@ public interface ParametricExpression extends Expression {
 	
 	public Expression pollLastArgument();
 	
+	//public void replaceArguments(Expression expression);
+	
 	public boolean hasPriorityOver(ParametricExpression expression);
 }

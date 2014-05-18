@@ -37,7 +37,6 @@ public class SimpleExpression implements ParametricExpression {
 	@Override
 	public void addArgument(Expression expression) {
 		this.numArgs++;
-		
 		this.arguments.add(expression);
 	}
 	
@@ -58,12 +57,13 @@ public class SimpleExpression implements ParametricExpression {
 		return lastArgument;
 	}
 	
+	/*@Override
 	public void replaceArguments(Expression expression) {
 		this.arguments = new LinkedList<Expression>();
 		this.numArgs = 0;
 		
 		this.addArgument(expression);
-	}
+	}*/
 	
 	@Override
 	public double solve() throws MathematicalException {
