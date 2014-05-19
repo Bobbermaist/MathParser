@@ -18,7 +18,7 @@ public class MainTest {
 		ExpressionTree tree = parser.getTree();
 		
 		System.out.println(tree.toString());
-		//System.out.println(tree.solve());
+		System.out.println(tree.solve());
 		
 		s.close();
 	}
