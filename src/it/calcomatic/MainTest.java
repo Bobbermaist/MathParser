@@ -3,7 +3,7 @@ package it.calcomatic;
 import java.text.ParseException;
 import java.util.Scanner;
 
-import it.calcomatic.math.ComplexExpression;
+import it.calcomatic.math.ExpressionTree;
 import it.calcomatic.parser.MathematicalParser;
 
 public class MainTest {
@@ -15,9 +15,10 @@ public class MainTest {
 		MathematicalParser parser = new MathematicalParser();
 		parser.parse(input);
 		
-		ComplexExpression tree = parser.getTree();
+		ExpressionTree tree = parser.getTree();
 		
 		System.out.println(tree.toString());
+		//System.out.println(tree.solve());
 		
 		s.close();
 	}
