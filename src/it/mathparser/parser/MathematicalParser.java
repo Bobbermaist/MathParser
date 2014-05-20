@@ -11,6 +11,13 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
+/**
+ * The mathematical parser can convert
+ * an input string into an Expression Tree
+ * that can be solved.
+ * 
+ * @author emiliano
+ */
 public class MathematicalParser {
 	
 	private ExpressionTree expression;

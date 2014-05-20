@@ -6,6 +6,11 @@ import it.mathparser.math.BinaryOperator;
 import it.mathparser.math.Expression;
 import it.mathparser.math.MathematicalException;
 
+/**
+ * The binary minus operator implements the subtraction.
+ * 
+ * @author emiliano
+ */
 public class BinaryMinusOperator extends BinaryOperator {
 
 	private static final String PATTERN = "-";

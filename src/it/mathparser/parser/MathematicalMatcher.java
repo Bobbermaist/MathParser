@@ -9,6 +9,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.Iterator;
 
+/**
+ * The mathematical matcher can recognize the next
+ * mathematical symbol in a string.
+ * 
+ * @author emiliano
+ */
 public class MathematicalMatcher {
 	
 	private LinkedHashMap<Pattern, String> symbolTable;
@@ -26,7 +32,7 @@ public class MathematicalMatcher {
 	}
 	
 	private void initTable() {
-		this.symbolTable = new LinkedHashMap<Pattern, String>(9);
+		this.symbolTable = new LinkedHashMap<Pattern, String>(10);
 		this.factory = new SymbolFactory();
 		
 		String[] list = SymbolFactory.SYMBOL_LIST;

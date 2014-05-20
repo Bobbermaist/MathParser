@@ -6,6 +6,11 @@ import it.mathparser.math.BinaryOperator;
 import it.mathparser.math.Expression;
 import it.mathparser.math.MathematicalException;
 
+/**
+ * The plus operator implements the addition.
+ * 
+ * @author emiliano
+ */
 public class PlusOperator extends BinaryOperator {
 
 	private static final String PATTERN= "\\+";

@@ -6,6 +6,11 @@ import it.mathparser.math.BinaryOperator;
 import it.mathparser.math.Expression;
 import it.mathparser.math.MathematicalException;
 
+/**
+ * The slash operator implements the division.
+ * 
+ * @author emiliano
+ */
 public class SlashOperator extends BinaryOperator {
 	
 	private static final String PATTERN = "/";

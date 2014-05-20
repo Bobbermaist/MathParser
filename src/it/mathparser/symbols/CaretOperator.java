@@ -6,6 +6,11 @@ import it.mathparser.math.BinaryOperator;
 import it.mathparser.math.Expression;
 import it.mathparser.math.MathematicalException;
 
+/**
+ * The caret operator implements the exponentiation.
+ * 
+ * @author emiliano
+ */
 public class CaretOperator extends BinaryOperator {
 	
 	private static final String PATTERN = "\\^";

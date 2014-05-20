@@ -2,6 +2,11 @@ package it.mathparser.symbols;
 
 import it.mathparser.math.ClosingBracket;
 
+/**
+ * Implements a closing round bracket.
+ * 
+ * @author emiliano
+ */
 public class ClosingRoundBracket implements ClosingBracket {
 
 	private static final String PATTERN = "\\)";

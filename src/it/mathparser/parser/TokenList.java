@@ -5,6 +5,12 @@ import java.util.ListIterator;
 
 import it.mathparser.math.Symbol;
 
+/**
+ * An extension of the Java linked list with the implementation
+ * of the Token Iterator.
+ * 
+ * @author emiliano
+ */
 public class TokenList extends LinkedList<Symbol> {
 
 	private static final long serialVersionUID = -4206839435081734780L;

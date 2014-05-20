@@ -2,6 +2,19 @@ package it.mathparser.math;
 
 import java.util.LinkedList;
 
+/**
+ * An Expression Tree is a group of expression in a particular order.
+ * 
+ * The main methods are addArgument() and addOperator().
+ * 
+ * addArgument()
+ * 	adds an Expression to the tree, appending it to the last
+ * 	ParametricExpression added.
+ * addOperator()
+ * 	tries to add a new node to the tree in the right position.
+ * 
+ * @author emiliano
+ */
 public class ExpressionTree implements ParametricExpression {
 
 	private Node root;

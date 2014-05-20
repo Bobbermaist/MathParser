@@ -2,6 +2,11 @@ package it.mathparser.symbols;
 
 import it.mathparser.math.OpeningBracket;
 
+/**
+ * Implements an opening round bracket.
+ * 
+ * @author emiliano
+ */
 public class OpeningRoundBracket implements OpeningBracket {
 
 	private static final String PATTERN = "\\(";

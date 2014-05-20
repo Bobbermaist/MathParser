@@ -6,6 +6,16 @@ import it.mathparser.math.Expression;
 import it.mathparser.math.MathematicalException;
 import it.mathparser.math.UnaryOperator;
 
+/**
+ * The unary minus operator implements the additive inverse
+ * operation.
+ * 
+ * E.g.
+ * 	-5
+ * 	-(2+3)
+ * 
+ * @author emiliano
+ */
 public class UnaryMinusOperator extends UnaryOperator {
 
 	private static final String PATTERN = "-";

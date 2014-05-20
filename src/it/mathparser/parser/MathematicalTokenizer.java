@@ -9,6 +9,12 @@ import it.mathparser.math.UnaryOperator;
 import it.mathparser.symbols.BinaryMinusOperator;
 import it.mathparser.symbols.UnaryMinusOperator;
 
+/**
+ * The mathematical tokenizer provides a way to convert
+ * a string into a list of symbols (or tokens).
+ * 
+ * @author emiliano
+ */
 public class MathematicalTokenizer {
 
 	private TokenList tokens;

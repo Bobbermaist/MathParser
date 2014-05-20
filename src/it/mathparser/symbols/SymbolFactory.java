@@ -2,6 +2,13 @@ package it.mathparser.symbols;
 
 import it.mathparser.math.Symbol;
 
+/**
+ * The symbol factory provides a way to instantiate
+ * mathematical symbols by their simple names,
+ * their fully qualified names or from another instance.
+ * 
+ * @author emiliano
+ */
 public class SymbolFactory {
 
 	private static final String SYMBOL_PACKAGE = "it.calcomatic.symbols";

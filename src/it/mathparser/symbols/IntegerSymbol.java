@@ -2,6 +2,11 @@ package it.mathparser.symbols;
 
 import it.mathparser.math.NumericSymbol;
 
+/**
+ * The integer symbol implements an integer number.
+ * 
+ * @author emiliano
+ */
 public class IntegerSymbol implements NumericSymbol {
 	
 	private static final String PATTERN = "[0-9]+";

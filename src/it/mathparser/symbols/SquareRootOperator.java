@@ -6,6 +6,11 @@ import it.mathparser.math.Expression;
 import it.mathparser.math.MathematicalException;
 import it.mathparser.math.UnaryOperator;
 
+/**
+ * Implements the square root operation.
+ * 
+ * @author emiliano
+ */
 public class SquareRootOperator extends UnaryOperator {
 
 	private static final String PATTERN = "sqrt";

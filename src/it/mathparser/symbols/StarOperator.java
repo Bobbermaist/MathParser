@@ -6,6 +6,11 @@ import it.mathparser.math.BinaryOperator;
 import it.mathparser.math.Expression;
 import it.mathparser.math.MathematicalException;
 
+/**
+ * The binary star operator implements the multiplication.
+ * 
+ * @author emiliano
+ */
 public class StarOperator extends BinaryOperator {
 
 	private static final String PATTERN = "\\*";
