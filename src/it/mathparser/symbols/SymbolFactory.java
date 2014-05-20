@@ -11,7 +11,7 @@ import it.mathparser.math.Symbol;
  */
 public class SymbolFactory {
 
-	private static final String SYMBOL_PACKAGE = "it.calcomatic.symbols";
+	private static final String SYMBOL_PACKAGE = "it.mathparser.symbols";
 	
 	public static final String[] SYMBOL_LIST = {
 		"IntegerSymbol",
