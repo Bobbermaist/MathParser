@@ -11,14 +11,24 @@ public class MainTest {
 	public static void main(String[] args) throws ParseException {
 		Scanner s = new Scanner(System.in);
 		
-		String input = s.nextLine();
-		MathematicalParser parser = new MathematicalParser();
-		parser.parse(input);
-		
-		ExpressionTree tree = parser.getTree();
-		
-		System.out.println(tree.toString());
-		System.out.println(tree.solve());
+		while (true) {
+			String input = s.nextLine();
+			if (input.equals("")) {
+				System.out.println("null");
+				continue;
+			}
+			if (input.equals("exit")) {
+				break;
+			}
+			
+			MathematicalParser parser = new MathematicalParser();
+			parser.parse(input);
+			
+			ExpressionTree tree = parser.getTree();
+			
+			System.out.println(tree.toString());
+			System.out.println(tree.solve());
+		}
 		
 		s.close();
 	}

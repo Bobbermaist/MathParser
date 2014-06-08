@@ -5,7 +5,7 @@ import it.mathparser.math.Symbol;
 /**
  * The symbol factory provides a way to instantiate
  * mathematical symbols by their simple names,
- * their fully qualified names or from another instance.
+ * their fully qualified names or from another symbol instance.
  * 
  * @author emiliano
  */
@@ -20,7 +20,9 @@ public class SymbolFactory {
 		"SlashOperator", "SquareRootOperator", "CaretOperator",
 		"FactorialOperator",
 		
-		"OpeningRoundBracket", "ClosingRoundBracket"
+		"OpeningRoundBracket", "ClosingRoundBracket",
+		
+		"Variable"
 	};
 	
 	public Symbol instanceForName(String className) {
